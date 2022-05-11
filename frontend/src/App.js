@@ -1,7 +1,15 @@
 import React from "react";
+import Main from "./components/Main";
+import Side from "./components/Side";
+import "./styles/App.css";
 
 const App = () => {
-  return <div>나와라 오바</div>;
+  return (
+    <div className="App">
+      <Side />
+      <Main />
+    </div>
+  );
 };
 
 export default App;
