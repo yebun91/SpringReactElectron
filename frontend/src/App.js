@@ -1,24 +1,30 @@
 import "./styles/App.css";
-import React, { useState, useEffect } from "react";
-import ValidationSample from "./components/ValidationSample";
+import React, { Component } from "react";
+import LifeCycleSample from "./components/LifeCycleSample";
+import ErrorBoundary from "./components/ErrorBoundary";
 
-function App() {
-  // const [value, setValue] = useState([]);
-  // useEffect(() => {
-  //   fetch("/hello")
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setValue(data);
-  //     });
-  // }, []);
-  return (
-    <div>
-      {/*<MyComponent name={value.name} age={value.age} gender={value.gender} />*/}
-      <ValidationSample />
-    </div>
-  );
+function getRandomColor() {
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
+class App extends Component {
+  state = {
+    color: "#000000",
+  };
+  handleClick = () => {
+    this.setState({
+      color: getRandomColor(),
+    });
+  };
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>랜덤생성</button>
+        <ErrorBoundary>
+          <LifeCycleSample color={this.state.color} />
+        </ErrorBoundary>
+      </div>
+    );
+  }
 }
 
 export default App;
