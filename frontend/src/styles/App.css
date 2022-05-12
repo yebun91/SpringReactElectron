@@ -9,5 +9,8 @@ main{
 nav{
   min-width: 250px;
   height: 100vh;
-  background-color: rosybrown;
+
+}
+.navTop{
+  height: 50px;
 }

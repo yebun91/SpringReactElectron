@@ -1,7 +1,29 @@
 import React from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Grid from "@mui/material/Grid";
+import FolderIcon from "@mui/icons-material/Folder";
 
-const ChatList = ({ name }) => {
-  return <div>{name}</div>;
+const ChatList = ({ name, age, hobby, servant }) => {
+  return (
+    <>
+      <Grid item xs={12} md={6}>
+        <List>
+          <ListItem>
+            <ListItemIcon>
+              <FolderIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={`${name}(${age})`}
+              secondary={`${hobby} - ${servant}`}
+            />
+          </ListItem>
+        </List>
+      </Grid>
+    </>
+  );
 };
 
 export default ChatList;
