@@ -10,8 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatDto {
-    private Long id;
-    private String name;
-    private String message;
-    private Date date;
+    private Integer id;
+    private Integer from_id;
+    private String content;
+    private Integer to_id;
 }

@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import FolderIcon from "@mui/icons-material/Folder";
 
-const ChatList = ({ name, age, hobby, servant }) => {
+const ChatList = ({ name}) => {
   return (
     <>
       <Grid item xs={12} md={6}>
@@ -16,8 +16,7 @@ const ChatList = ({ name, age, hobby, servant }) => {
               <FolderIcon />
             </ListItemIcon>
             <ListItemText
-              primary={`${name}(${age})`}
-              secondary={`${hobby} - ${servant}`}
+              primary={`${name}`}
             />
           </ListItem>
         </List>
