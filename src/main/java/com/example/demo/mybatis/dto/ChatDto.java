@@ -11,7 +11,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class ChatDto {
     private Integer id;
-    private Integer from_id;
+    private String user_id;
+    private String user_name;
+    private Date send_date;
+    private Integer room_id;
     private String content;
-    private Integer to_id;
 }

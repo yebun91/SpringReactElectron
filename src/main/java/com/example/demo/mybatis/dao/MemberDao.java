@@ -11,6 +11,5 @@ import java.util.List;
 @Mapper
 public interface MemberDao{
     List<MemberDto> getAllDataList();
-
     List<ChatDto> getMemberChat(int id);
 }
