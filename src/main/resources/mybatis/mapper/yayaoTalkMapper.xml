@@ -2,11 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.demo.mybatis.dao.MemberDao">
-    <select id="getAllDataList" resultType="com.example.demo.mybatis.dto.MemberDto">
-        select * from member;
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+    <resultMap id="MemberMap" type="com.example.demo.entity.Member">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="age" property="age" />
+        <result column="hobby" property="hobby" />
+    </resultMap>
+    <resultMap id="ChatMap" type="com.example.demo.entity.Chat">
+        <result column="id" property="id" />
+        <result column="chat_room_id" property="chat_room_id" />
+        <result column="message" property="message" />
+        <result column="send_date" property="send_date" />
+    </resultMap>
+
+    <select id="findData" resultMap="MemberMap">
+        select * from yjchoi.member;
     </select>
-    <select id="getMemberChat" resultType="com.example.demo.mybatis.dto.ChatDto">
-        select * from chat_list where to_id = ${id};
+    <select id="findChatData" resultMap="ChatMap">
+        select * from yjchoi.chat where chat_room_id = ${id};
+    </select>
+    <select id="findDataTotalCount" resultType="Integer">
+        select count(*) from member;
     </select>
 </mapper>

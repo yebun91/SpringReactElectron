@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-const Messages = ({ to_id, content }) => {
+const Messages = ({ chat_room_id, message, send_date }) => {
 	const Item = styled(Paper)(({ theme }) => ({
 		...theme.typography.body2,
 		color: theme.palette.text.secondary
@@ -25,10 +25,10 @@ const Messages = ({ to_id, content }) => {
 					<Card sx={{ minWidth: 275 }}>
 						<CardContent>
 							<Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-								{to_id}
+								{chat_room_id}
 							</Typography>
 							<Typography variant="h5" component="div">
-								{content}
+								{message}({send_date})
 							</Typography>
 						</CardContent>
 					</Card>

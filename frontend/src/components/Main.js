@@ -40,7 +40,7 @@ const Main = ({ messageId }) => {
 			{messageId === 0 ? (
 				<Home />
 			) : (
-				messages.map((message) => <Messages key={message.id} to_id={message.to_id} content={message.content} />)
+				messages.map((message) => <Messages key={message.id} chat_room_id={message.chat_room_id} message={message.message} send_date={message.send_date} />)
 			)}
 		</main>
 	);
