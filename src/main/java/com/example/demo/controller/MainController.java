@@ -21,10 +21,6 @@ public class MainController {
 
     @GetMapping("chat")
     public List<Chat> chatList(int id){
-        List<Chat> dd = memberMapper.findChatData(id);
-        for(Chat dto : dd){
-            System.out.println(dto);
-        }
         return memberMapper.findChatData(id);
     }
 }
