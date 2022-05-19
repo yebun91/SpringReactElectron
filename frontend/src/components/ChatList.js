@@ -1,10 +1,10 @@
-import React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Grid from "@mui/material/Grid";
-import FolderIcon from "@mui/icons-material/Folder";
+import React from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Grid from '@mui/material/Grid';
+import FolderIcon from '@mui/icons-material/Folder';
 
 const ChatList = ({ name }) => {
   return (
@@ -23,4 +23,4 @@ const ChatList = ({ name }) => {
   );
 };
 
-export default React.memo(ChatList);
+export default ChatList;

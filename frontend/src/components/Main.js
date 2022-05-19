@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Messages from "./Messages";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import Messages from './Messages';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Main = () => {
   const [messages, setMessages] = useState([]);
@@ -10,14 +10,14 @@ const Main = () => {
   useEffect(() => {
     if (id !== 0) {
       axios({
-        method: "get",
+        method: 'get',
         url: `/chat/${id}`,
         // params: { api_key: "1234", langualge: "en" }, // 파라미터를 전달
-        responseType: "json",
+        responseType: 'json',
         maxContentLength: 2000,
       }).then(function (response) {
         setMessages(response.data);
-        console.log("messageData : ", response.data);
+        console.log('messageData : ', response.data);
       });
     }
   }, [id]);
