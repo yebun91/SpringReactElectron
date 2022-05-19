@@ -1,49 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import Home from './Home';
-import Messages from './Messages';
+import React, { useEffect, useState } from "react";
+import Messages from "./Messages";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const Main = ({ messageId }) => {
-	const [ messages, setMessages ] = useState([]);
+const Main = () => {
+  const [messages, setMessages] = useState([]);
+  const { id } = useParams();
 
-	useEffect(
-		() => {
-			if (messageId !== 0) {
-				fetch(`/chat?id=${messageId}`, {
-					method: 'GET',
-					cache: 'no-cache',
-					headers: {
-						'Content-Type': 'application/json',
-						Accept: 'application/json'
-					},
-					// body:JSON.stringify({
-					//   name:'어쩌구',
-					//   age:20
-					// }),
-					credentials: 'same-origin',
-					redirect: 'follow',
-					referrer: 'no-referrer'
-				})
-					.then((res) => {
-						return res.json();
-					})
-					.then((data) => {
-						setMessages(data);
-						console.log('messageData : ', data);
-					});
-			}
-		},
-		[ messageId ]
-	);
+  useEffect(() => {
+    if (id !== 0) {
+      axios({
+        method: "get",
+        url: `/chat/${id}`,
+        // params: { api_key: "1234", langualge: "en" }, // 파라미터를 전달
+        responseType: "json",
+        maxContentLength: 2000,
+      }).then(function (response) {
+        setMessages(response.data);
+        console.log("messageData : ", response.data);
+      });
+    }
+  }, [id]);
 
-	return (
-		<main>
-			{messageId === 0 ? (
-				<Home />
-			) : (
-				messages.map((message) => <Messages key={message.id} chat_room_id={message.chat_room_id} message={message.message} send_date={message.send_date} />)
-			)}
-		</main>
-	);
+  return (
+    <main>
+      {messages.map((message) => (
+        <Messages
+          key={message.id}
+          chat_room_id={message.chat_room_id}
+          message={message.message}
+          send_date={message.send_date}
+        />
+      ))}
+    </main>
+  );
 };
 
 export default Main;

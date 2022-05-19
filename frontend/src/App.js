@@ -1,54 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import Main from './components/Main';
-import ChatList from './components/ChatList';
-import './styles/App.css';
-import Button from '@mui/material/Button';
+import React, { useEffect, useState } from "react";
+import Main from "./components/Main";
+import ChatList from "./components/ChatList";
+import "./styles/App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./components/Home";
+import axios from "axios";
 
 const App = () => {
-	const [ member, setMember ] = useState([]);
-	const [ messageId, setMessageId ] = useState(0);
+  const [chats, setChats] = useState([]);
 
-	useEffect(() => {
-		fetch('/hello', {
-			method: 'GET',
-			cache: 'no-cache',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json'
-			},
-			// body:JSON.stringify({
-			//   name:'어쩌구',
-			//   age:20
-			// }),
-			credentials: 'same-origin',
-			redirect: 'follow',
-			referrer: 'no-referrer'
-		})
-			.then((res) => {
-				return res.json();
-			})
-			.then((data) => {
-				setMember(data);
-				console.log('memberData : ', data);
-			});
-	}, []);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/chat-list",
+      // params: { api_key: "1234", langualge: "en" }, // 파라미터를 전달
+      responseType: "json",
+      maxContentLength: 2000,
+    }).then(function (response) {
+      setChats(response.data);
+      console.log("memberData : ", response.data);
+    });
+  }, []);
 
-	const onClick = (id) => {
-		setMessageId(id);
-	};
-
-	return (
-		<div className="App">
-			<nav>
-				{member.map((member) => (
-					<div key={member.id} onClick={() => onClick(member.id)}>
-						<ChatList name={member.name} />
-					</div>
-				))}
-			</nav>
-			<Main messageId={messageId} />
-		</div>
-	);
+  return (
+    <div className="App">
+      <nav>
+        {chats.map((chat) => {
+          const url = `/chat/${chat.id}`;
+          return (
+            <Link
+              key={chat.id}
+              to={{
+                pathname: url,
+              }}
+            >
+              <div>
+                <ChatList name={chat.name} />
+              </div>
+            </Link>
+          );
+        })}
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/chat/:id" element={<Main />} />
+      </Routes>
+    </div>
+  );
 };
 
 export default App;

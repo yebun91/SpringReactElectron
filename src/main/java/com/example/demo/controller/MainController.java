@@ -5,6 +5,7 @@ import com.example.demo.entity.Member;
 import com.example.demo.mapper.MemberMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
@@ -14,13 +15,14 @@ public class MainController {
 
     private MemberMapper memberMapper;
 
-    @GetMapping("hello")
-    public List<Member> Hello(){
+    @GetMapping("/chat-list")
+    public List<Member> chatList(){
         return memberMapper.findData();
     }
 
-    @GetMapping("chat")
-    public List<Chat> chatList(int id){
+    @GetMapping("/chat/{id}")
+    public List<Chat> messageList(@PathVariable int id){
+        System.out.println(id);
         return memberMapper.findChatData(id);
     }
 }

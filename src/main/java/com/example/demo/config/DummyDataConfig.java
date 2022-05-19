@@ -18,23 +18,25 @@ public class DummyDataConfig implements CommandLineRunner {
     private final MemberRepository memberRepository;
     private final ChatRepository chatRepository;
 
-    String[] name = {"길동", "갈등", "갤덩", "굴둥", "걸덩"};
+    String[] name = {"가", "나", "다", "라", "마"};
     String[] hobby = {"불멍때리기", "게임하기", "산책하기", "카페가기", "아무것도 하지 않기", "맛집탐방"};
     String[] message = {"안녕하세요", "반갑습니다", "메세지입니다", "랜덤입니다", "모르겠습니다", "집에가고싶다"};
 
     @Override
     public void run(String... args) throws Exception {
+        int numLength = 10;
+
         if (!memberRepository.findById(1L).isPresent()) {
-            for (int i = 0 ; i<100; i++){
+            for (int i = 0 ; i<numLength; i++){
                 Member member = memberRepository.save(
                         Member.builder()
-                                .age(random.nextInt(100)+1)
+                                .age(random.nextInt(numLength)+1)
                                 .hobby(hobby[random.nextInt(hobby.length)])
                                 .name(name[random.nextInt(name.length)]).build()
                 );
                 Chat chat = chatRepository.save(
                         Chat.builder()
-                                .chat_room_id(random.nextInt(100)+1)
+                                .chat_room_id(random.nextInt(numLength)+1)
                                 .message(message[random.nextInt(hobby.length)])
                                 .send_date(new Date()).build()
                 );
