@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Navigate, NavLink } from 'react-router-dom';
 import { createStore } from 'redux';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../actions/user_action';
 
 const Login = () => {
 	const [ id, setId ] = useState('');
@@ -14,36 +16,49 @@ const Login = () => {
 		setId(e.target.value);
 	};
 
-	function user(state = [], action) {
-		switch (action.type) {
-			case 'SET_USER':
-				return state.concat([ action.user ]);
-
-			default:
-				return state;
-		}
-	}
-	const store = createStore(user, []);
+	// function user(state = [], action) {
+	// 	switch (action.type) {
+	// 		case 'SET_USER':
+	// 			return state.concat([ action.user ]);
+	// 		default:
+	// 			return state;
+	// 	}
+	// }
+	// const store = createStore(user, []);
+	const dispatch = useDispatch();
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		axios({
-			method: 'post',
-			url: '/member-login',
-			params: { member_id: id, member_pw: pw } // 파라미터를 전달
-		}).then(function(response) {
-			if (response.data) {
+		let body = {
+			member_id: id,
+			member_pw: pw
+		};
+		dispatch(loginUser(body)).then((response) => {
+			if (response.payload.loginSuccess) {
+				console.log(response);
 				alert('로그인 되었음.');
-				console.log(response.data.member_name);
-				store.dispatch({
-					type: 'SET_USER',
-					user: response.data
-				});
-				console.log(`redux 데이터 : ${store.getState()}`);
 			} else {
 				alert('로그인 안됨.');
 			}
 		});
+
+		// axios({
+		// 	method: 'post',
+		// 	url: '/member-login',
+		// 	params: { member_id: id, member_pw: pw } // 파라미터를 전달
+		// }).then(function(response) {
+		// 	if (response.data) {
+		// 		alert('로그인 되었음.');
+		// 		console.log(response.data.member_name);
+		// 		store.dispatch({
+		// 			type: 'SET_USER',
+		// 			user: response.data.member_name
+		// 		});
+		// 		console.log(`redux 데이터 : ${store.getState()}`);
+		// 	} else {
+		// 		alert('로그인 안됨.');
+		// 	}
+		// });
 	};
 
 	return (

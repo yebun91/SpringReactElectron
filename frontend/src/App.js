@@ -11,8 +11,8 @@ import { createStore } from 'redux';
 import { useSelector } from 'react-redux';
 
 const App = () => {
-	// const userName = useSelector((state) => state.member_name);
-	// console.log(`리덕스에서 가져온 ${userName}`);
+	const userName = useSelector((state) => state);
+	console.log(`리덕스에서 가져온 ${userName}`);
 	// const [ chats, setChats ] = useState([]);
 	// useEffect(() => {
 	// 	axios({
