@@ -9,4 +9,6 @@ public interface MemberMapper {
     @Mapper
     List<Member> findData();
     List<Chat> findChatData(int id);
+    int joinMember(Member member);
+    Member loginMember(String member_id, String member_pw);
 }
