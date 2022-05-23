@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+    <resultMap id="MemberMap" type="com.example.demo.entity.Member">
+        <result column="id" property="id" />
+        <result column="member_id" property="member_id" />
+        <result column="member_name" property="member_name" />
+        <result column="member_pw" property="member_pw" />
+    </resultMap>
+    <resultMap id="ChatMap" type="com.example.demo.entity.Chat">
+        <result column="id" property="id" />
+        <result column="chat_room_id" property="chat_room_id" />
+        <result column="message" property="message" />
+        <result column="send_date" property="send_date" />
+    </resultMap>
+
+    <select id="findData" resultMap="MemberMap">
+        select * from yjchoi.member;
+    </select>
+    <select id="findChatData" resultMap="ChatMap">
+        select * from yjchoi.chat where chat_room_id = #{id};
+    </select>
+    <insert id="joinMember" >
+        insert into yjchoi.member (member_id, member_pw, member_name) values (#{member_id}, #{member_pw}, #{member_name})
+    </insert>
+    <select id="loginMember" resultMap="MemberMap">
+        select * from yjchoi.member where member_id = #{member_id} and member_pw = #{member_pw};
+    </select>
+</mapper>
