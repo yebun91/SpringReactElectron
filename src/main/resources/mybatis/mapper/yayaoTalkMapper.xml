@@ -5,9 +5,9 @@
 <mapper namespace="com.example.demo.mapper.MemberMapper">
     <resultMap id="MemberMap" type="com.example.demo.entity.Member">
         <result column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="age" property="age" />
-        <result column="hobby" property="hobby" />
+        <result column="member_id" property="member_id" />
+        <result column="member_name" property="member_name" />
+        <result column="member_pw" property="member_pw" />
     </resultMap>
     <resultMap id="ChatMap" type="com.example.demo.entity.Chat">
         <result column="id" property="id" />
@@ -20,9 +20,12 @@
         select * from yjchoi.member;
     </select>
     <select id="findChatData" resultMap="ChatMap">
-        select * from yjchoi.chat where chat_room_id = ${id};
+        select * from yjchoi.chat where chat_room_id = #{id};
     </select>
-    <select id="findDataTotalCount" resultType="Integer">
-        select count(*) from member;
+    <insert id="joinMember" >
+        insert into yjchoi.member (member_id, member_pw, member_name) values (#{member_id}, #{member_pw}, #{member_name})
+    </insert>
+    <select id="loginMember" resultMap="MemberMap">
+        select * from yjchoi.member where member_id = #{member_id} and member_pw = #{member_pw};
     </select>
 </mapper>

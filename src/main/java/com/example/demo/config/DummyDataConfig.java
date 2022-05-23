@@ -19,7 +19,8 @@ public class DummyDataConfig implements CommandLineRunner {
     private final ChatRepository chatRepository;
 
     String[] name = {"가", "나", "다", "라", "마"};
-    String[] hobby = {"불멍때리기", "게임하기", "산책하기", "카페가기", "아무것도 하지 않기", "맛집탐방"};
+    String[] id = {"아이디1", "아이디2", "아이디3", "아이디4", "아이디5", "아이디6"};
+    String[] pw = {"비번1", "비번2", "비번3", "비번4", "비번5", "비번6"};
     String[] message = {"안녕하세요", "반갑습니다", "메세지입니다", "랜덤입니다", "모르겠습니다", "집에가고싶다"};
 
     @Override
@@ -27,17 +28,23 @@ public class DummyDataConfig implements CommandLineRunner {
         int numLength = 10;
 
         if (!memberRepository.findById(1L).isPresent()) {
+            Member member = memberRepository.save(
+                    Member.builder()
+                            .member_id("admin")
+                            .member_pw("admin")
+                            .member_name("admin").build()
+            );
+            Member member2 = memberRepository.save(
+                    Member.builder()
+                            .member_id("test")
+                            .member_pw("test")
+                            .member_name("test").build()
+            );
             for (int i = 0 ; i<numLength; i++){
-                Member member = memberRepository.save(
-                        Member.builder()
-                                .age(random.nextInt(numLength)+1)
-                                .hobby(hobby[random.nextInt(hobby.length)])
-                                .name(name[random.nextInt(name.length)]).build()
-                );
                 Chat chat = chatRepository.save(
                         Chat.builder()
                                 .chat_room_id(random.nextInt(numLength)+1)
-                                .message(message[random.nextInt(hobby.length)])
+                                .message(message[random.nextInt(message.length)])
                                 .send_date(new Date()).build()
                 );
             }

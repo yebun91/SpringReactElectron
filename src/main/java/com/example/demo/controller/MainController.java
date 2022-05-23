@@ -4,9 +4,9 @@ import com.example.demo.entity.Chat;
 import com.example.demo.entity.Member;
 import com.example.demo.mapper.MemberMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,7 +22,15 @@ public class MainController {
 
     @GetMapping("/chat/{id}")
     public List<Chat> messageList(@PathVariable int id){
-        System.out.println(id);
         return memberMapper.findChatData(id);
+    }
+    @PostMapping("/member-join")
+    public int memberJoin(Member member){
+        System.out.println("-----------------------memberJoin : " + member);
+        return memberMapper.joinMember(member);
+    }
+    @PostMapping("/member-login")
+    public Member memberLogin(HttpSession session, String member_id, String member_pw){
+        return memberMapper.loginMember(member_id, member_pw);
     }
 }

@@ -14,8 +14,8 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer age;
-    private String hobby;
-    private String name;
+    private String member_id;
+    private String member_name;
+    private String member_pw;
 
 }
