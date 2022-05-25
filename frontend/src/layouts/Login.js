@@ -1,25 +1,19 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { createStore } from 'redux';
+import { login } from '../store/store';
 
 const Login = () => {
 	const [ id, setId ] = useState('');
 	const [ pw, setPw ] = useState('');
-
 	const pwOnChange = (e) => {
 		setPw(e.target.value);
 	};
 	const idOnChange = (e) => {
 		setId(e.target.value);
 	};
-	const reducer = (state = [], action) => {
-		if (action.type === 'LOGIN_INFO') {
-			return { ...state, login_info: action.value };
-		}
-		return state;
-	};
-	const store = createStore(reducer);
+	const dispatch = useDispatch();
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -29,9 +23,10 @@ const Login = () => {
 			params: { member_id: id, member_pw: pw } // 파라미터를 전달
 		}).then(function(response) {
 			if (response.data) {
+				const member_name = response.data.member_name;
+				const member_id = response.data.id;
 				alert('로그인 되었음.');
-				store.dispatch({ type: 'LOGIN_INFO', value: response.data });
-				console.log(store.getState());
+				dispatch(login(member_name, member_id));
 			} else {
 				alert('로그인 안됨.');
 			}

@@ -7,6 +7,7 @@ import Home from './components/Home';
 import axios from 'axios';
 import Join from './layouts/Join';
 import Login from './layouts/Login';
+import { useSelector } from 'react-redux';
 
 const App = () => {
 	// const [ chats, setChats ] = useState([]);
@@ -22,7 +23,8 @@ const App = () => {
 	// 		console.log('chat-list 랜더됨 : ', response.data);
 	// 	});
 	// }, []);
-
+	const login = useSelector((state) => state);
+	const loginInfo = JSON.stringify(login);
 	return (
 		<div>
 			{/* <nav>

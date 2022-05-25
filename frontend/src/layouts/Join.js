@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const Join = () => {
@@ -8,6 +9,8 @@ const Join = () => {
 	const [ confirmPw, setConfirmPw ] = useState('');
 	const [ name, setName ] = useState('');
 	const navigate = useNavigate();
+	const login = useSelector((state) => state);
+	console.log(`login : ${JSON.stringify(login)}`);
 
 	const pwOnChange = (e) => {
 		setPw(e.target.value);
