@@ -5,12 +5,8 @@ import com.example.demo.entity.Member;
 import com.example.demo.entity.Room;
 import com.example.demo.mapper.MemberMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @AllArgsConstructor
@@ -34,7 +30,10 @@ public class MainController {
 //    public void sendMessage(@Payload Chat chat, @DestinationVariable int chat_room_id){
 //        memberMapper.convertAndSend("/queue/addChatToClient/"+chat_room_id, chat);
 //    }
-
+    @PostMapping("/chat/sendMessage")
+    public int sendMessage(String message, int chat_room_id, String member_id){
+        return memberMapper.sendMessage(message, chat_room_id, member_id);
+    }
     @PostMapping("/member-join")
     public int memberJoin(Member member){
         System.out.println("-----------------------memberJoin : " + member);

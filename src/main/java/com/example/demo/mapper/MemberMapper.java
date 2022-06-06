@@ -12,4 +12,5 @@ public interface MemberMapper {
     List<Chat> findChat(int chat_room_id); //채팅방 리스트 중 하나를 클릭 했을 때 그 방에 있는 채팅을 보여줌
     int joinMember(Member member); //회원가입
     Member loginMember(String member_id, String member_pw); //로그인
+    int sendMessage(String message, int chat_room_id, String member_id); //채팅보내기
 }

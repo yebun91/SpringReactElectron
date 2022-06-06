@@ -17,14 +17,6 @@ spring:
       generate-ddl: true
       format_sql: true
       show_sql: true
-  #정적리소스 서버 재시작 없이 바로 반영
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: true
-    thymeleaf:
-      cache: false
 # mybatis
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
