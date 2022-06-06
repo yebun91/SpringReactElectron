@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { login } from '../store/store';
 
@@ -24,7 +24,7 @@ const Login = () => {
 		}).then(function(response) {
 			if (response.data) {
 				const member_name = response.data.member_name;
-				const member_id = response.data.id;
+				const member_id = response.data.member_id;
 				alert('로그인 되었음.');
 				dispatch(login(member_name, member_id));
 			} else {

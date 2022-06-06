@@ -4,23 +4,26 @@
 
 <mapper namespace="com.example.demo.mapper.MemberMapper">
     <resultMap id="MemberMap" type="com.example.demo.entity.Member">
-        <result column="id" property="id" />
         <result column="member_id" property="member_id" />
         <result column="member_name" property="member_name" />
         <result column="member_pw" property="member_pw" />
     </resultMap>
     <resultMap id="ChatMap" type="com.example.demo.entity.Chat">
-        <result column="id" property="id" />
+        <result column="chat_id" property="chat_id" />
         <result column="chat_room_id" property="chat_room_id" />
+        <result column="member_id" property="member_id" />
         <result column="message" property="message" />
         <result column="send_date" property="send_date" />
     </resultMap>
-
-    <select id="findData" resultMap="MemberMap">
-        select * from yjchoi.member;
+    <select id="findChat" resultMap="ChatMap">
+        select * from yjchoi.chat where chat_room_id = #{chat_room_id}
     </select>
-    <select id="findChatData" resultMap="ChatMap">
-        select * from yjchoi.chat where chat_room_id = #{id};
+    <select id="findChatRoom" resultType="com.example.demo.entity.Room">
+        select *
+        from yjchoi.chat c
+            inner join (select * from yjchoi.room_join where member_id = #{member_id}) rj
+                on c.chat_room_id = rj.chat_room_id
+        where c.member_id = #{member_id}
     </select>
     <insert id="joinMember" >
         insert into yjchoi.member (member_id, member_pw, member_name) values (#{member_id}, #{member_pw}, #{member_name})

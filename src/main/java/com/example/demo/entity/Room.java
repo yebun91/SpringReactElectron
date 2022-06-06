@@ -12,14 +12,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema= "yjchoi", name= "chat")
+@Table(schema= "yjchoi", name= "room")
 @Builder
-public class Chat {
+public class Room {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int chat_id;
     private int chat_room_id;
-    private String message;
-    private String member_id;
-    private Date send_date;
+    private Date create_date;
 }

@@ -10,12 +10,8 @@ import javax.persistence.*;
 @Table(schema= "yjchoi", name= "member")
 @Builder
 public class Member {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String member_id;
     private String member_name;
     private String member_pw;
-
 }

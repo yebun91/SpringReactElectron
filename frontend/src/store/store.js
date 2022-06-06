@@ -13,7 +13,10 @@ export const login = (member_name, member_id) => {
 const reducer = (state = [], action) => {
 	switch (action.type) {
 		case LOGIN:
-			return [ ...state, { member_name: action.member_name, member_id: action.member_id } ];
+			return {
+				...state,
+				userInfo: { member_name: action.member_name, member_id: action.member_id }
+			};
 		default:
 			return state;
 	}
