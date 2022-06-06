@@ -17,31 +17,22 @@ public class MainController {
 
     @GetMapping("/chat-list")
     public List<Room> chatList(String id){
-        List<Room> roomList = memberMapper.findChatRoom(id);
-        System.out.println("-----------------------chat_list : "+ roomList);
         return memberMapper.findChatRoom(id);
     }
     @GetMapping("/chat/{chat_room_id}")
     public List<Chat> messageList(@PathVariable int chat_room_id){
-        System.out.println("-----------------------messageList : "+ memberMapper.findChat(chat_room_id));
         return memberMapper.findChat(chat_room_id);
     }
-//    @MessageMapping("/chat/{chat_room_id}")
-//    public void sendMessage(@Payload Chat chat, @DestinationVariable int chat_room_id){
-//        memberMapper.convertAndSend("/queue/addChatToClient/"+chat_room_id, chat);
-//    }
     @PostMapping("/chat/sendMessage")
     public int sendMessage(String message, int chat_room_id, String member_id){
         return memberMapper.sendMessage(message, chat_room_id, member_id);
     }
     @PostMapping("/member-join")
     public int memberJoin(Member member){
-        System.out.println("-----------------------memberJoin : " + member);
         return memberMapper.joinMember(member);
     }
     @PostMapping("/member-login")
     public Member memberLogin(String member_id, String member_pw){
-        System.out.println("-----------------------memberlogin : " + memberMapper.loginMember(member_id, member_pw));
         return memberMapper.loginMember(member_id, member_pw);
     }
 }
