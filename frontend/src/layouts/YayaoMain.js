@@ -2,12 +2,16 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
+import AddRoom from '../components/AddRoom';
 import ChatList from '../components/ChatList';
 import Main from '../components/Main';
 
 const YayaoMain = () => {
 	const [ chats, setChats ] = useState([]);
+	const [ config, setConfig ] = useState(false);
 	const login = useSelector((state) => state.userInfo);
+	const handleOpen = () => setConfig(true);
+	const handleClose = () => setConfig(false);
 	useEffect(() => {
 		axios({
 			method: 'get',
@@ -22,6 +26,10 @@ const YayaoMain = () => {
 	}, []);
 	return (
 		<div style={{ display: 'flex' }}>
+			<AddRoom handleClose={handleClose} open={config} />
+			<button type="button" onClick={handleOpen}>
+				방 추가하기
+			</button>
 			<nav>
 				{chats.map((chat) => (
 					<Link

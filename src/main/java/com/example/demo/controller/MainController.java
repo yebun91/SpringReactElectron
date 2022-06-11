@@ -19,6 +19,12 @@ public class MainController {
     public List<Room> chatList(String id){
         return memberMapper.findChatRoom(id);
     }
+
+    @GetMapping("/add-list")
+    public Room addList(String id){
+        return memberMapper.addChatRoom(id);
+    }
+
     @GetMapping("/chat/{chat_room_id}")
     public List<Chat> messageList(@PathVariable int chat_room_id){
         return memberMapper.findChat(chat_room_id);
@@ -27,10 +33,12 @@ public class MainController {
     public int sendMessage(String message, int chat_room_id, String member_id){
         return memberMapper.sendMessage(message, chat_room_id, member_id);
     }
+
     @PostMapping("/member-join")
     public int memberJoin(Member member){
         return memberMapper.joinMember(member);
     }
+
     @PostMapping("/member-login")
     public Member memberLogin(String member_id, String member_pw){
         return memberMapper.loginMember(member_id, member_pw);

@@ -13,4 +13,5 @@ public interface MemberMapper {
     int joinMember(Member member); //회원가입
     Member loginMember(String member_id, String member_pw); //로그인
     int sendMessage(String message, int chat_room_id, String member_id); //채팅보내기
+    Room addChatRoom(String id); //채팅방 추가하기
 }
