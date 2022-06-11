@@ -6,7 +6,11 @@ import com.example.demo.entity.Room;
 import com.example.demo.mapper.MemberMapper;
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,18 +21,26 @@ public class MainController {
 
     @GetMapping("/chat-list")
     public List<Room> chatList(String id){
-        return memberMapper.findChatRoom(id);
+        List<Room> rooms = new ArrayList<>();
+        rooms = memberMapper.findChatRoom(id);
+        System.out.println(rooms);
+        return rooms;
     }
 
     @GetMapping("/add-list")
-    public Room addList(String id){
-        return memberMapper.addChatRoom(id);
+    public int addList(String search_id, String member_id){
+        int result = 0;
+        Room room = new Room();
+        memberMapper.addChatRoom(room);
+        result = memberMapper.chatRoomJoin(search_id, member_id, room.getChat_room_id());
+        return result;
     }
 
     @GetMapping("/chat/{chat_room_id}")
     public List<Chat> messageList(@PathVariable int chat_room_id){
         return memberMapper.findChat(chat_room_id);
     }
+
     @PostMapping("/chat/sendMessage")
     public int sendMessage(String message, int chat_room_id, String member_id){
         return memberMapper.sendMessage(message, chat_room_id, member_id);

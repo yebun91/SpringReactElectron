@@ -12,18 +12,21 @@ const YayaoMain = () => {
 	const login = useSelector((state) => state.userInfo);
 	const handleOpen = () => setConfig(true);
 	const handleClose = () => setConfig(false);
-	useEffect(() => {
-		axios({
-			method: 'get',
-			url: '/chat-list',
-			params: { id: login['member_id'] }, // 파라미터를 전달
-			responseType: 'json',
-			maxContentLength: 2000
-		}).then(function(response) {
-			setChats(response.data);
-			console.log('chat-list 랜더됨 : ', response.data);
-		});
-	}, []);
+	useEffect(
+		() => {
+			axios({
+				method: 'get',
+				url: '/chat-list',
+				params: { id: login['member_id'] }, // 파라미터를 전달
+				responseType: 'json',
+				maxContentLength: 2000
+			}).then(function(response) {
+				setChats(response.data);
+				console.log('chat-list 랜더됨 : ', response.data);
+			});
+		},
+		[ config ]
+	);
 	return (
 		<div style={{ display: 'flex' }}>
 			<AddRoom handleClose={handleClose} open={config} />

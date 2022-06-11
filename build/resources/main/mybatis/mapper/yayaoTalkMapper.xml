@@ -20,7 +20,7 @@
     </select>
     <select id="findChatRoom" resultType="com.example.demo.entity.Room">
         select DISTINCT c.chat_room_id
-        from yjchoi.chat c
+        from yjchoi.room_join c
             inner join (select * from yjchoi.room_join where member_id = #{member_id}) rj
                 on c.chat_room_id = rj.chat_room_id
         where c.member_id = #{member_id}
@@ -33,5 +33,12 @@
     </select>
     <insert id="sendMessage">
         insert into yjchoi.chat (chat_room_id, member_id, message, send_date) values (#{chat_room_id}, #{member_id}, #{message}, NOW())
+    </insert>
+    <insert id="addChatRoom" useGeneratedKeys="true" keyProperty="chat_room_id" parameterType="com.example.demo.entity.Room">
+        insert into yjchoi.room (create_date) values (NOW())
+    </insert>
+    <insert id="chatRoomJoin">
+        insert into yjchoi.room_join (chat_room_id, member_id) values (#{chat_room_id}, #{member_id});
+        insert into yjchoi.room_join (chat_room_id, member_id) values (#{chat_room_id}, #{search_id})
     </insert>
 </mapper>

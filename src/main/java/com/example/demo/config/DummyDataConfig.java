@@ -43,6 +43,12 @@ public class DummyDataConfig implements CommandLineRunner {
                         .member_pw("yujin")
                         .member_name("yujin").build()
         );
+        Member member4 = memberRepository.save(
+                Member.builder()
+                        .member_id("aa")
+                        .member_pw("aa")
+                        .member_name("aa").build()
+        );
         Chat chat = chatRepository.save(
             Chat.builder()
                     .chat_room_id(1)

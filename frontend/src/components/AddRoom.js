@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const ConfigForm = styled.form`
 	display: flex;
@@ -36,6 +37,7 @@ const AddRoom = ({ open, handleClose }) => {
 	const [ config ] = useState(false);
 	const [ input, setInput ] = useState('');
 	const [ message, setMessage ] = useState(false);
+	const login = useSelector((state) => state.userInfo);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -43,7 +45,7 @@ const AddRoom = ({ open, handleClose }) => {
 		axios({
 			method: 'get',
 			url: '/add-list',
-			params: { id: input }, // 파라미터를 전달
+			params: { search_id: input, member_id: login['member_id'] }, // 파라미터를 전달
 			responseType: 'json',
 			maxContentLength: 2000
 		}).then(function(response) {
