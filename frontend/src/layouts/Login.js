@@ -3,6 +3,35 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { login } from '../store/store';
+import styled from 'styled-components';
+
+const Login_div = styled.div`
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	h1 {
+		color: var(--gray-color);
+	}
+	input {
+		display: block;
+		margin: 20px 0;
+		width: 250px;
+		border: 1px solid var(--ligth-gray-color);
+	}
+	.join_btn {
+		color: var(--gray-color);
+	}
+	.bottom_btn {
+		display: flex;
+		justify-content: space-between;
+		button {
+			width: 100px;
+			border: 1px solid var(--ligth-gray-color);
+		}
+	}
+`;
 
 const Login = () => {
 	const [ id, setId ] = useState('');
@@ -34,16 +63,28 @@ const Login = () => {
 	};
 
 	return (
-		<div>
+		<Login_div>
+			<h1>YayaoTalk</h1>
 			<form onSubmit={onSubmit}>
-				<input name="id" type="text" placeholder="아이디를 입력하세요" value={id} onChange={idOnChange} />
-				<br />
-				<input name="pw" type="password" placeholder="비밀번호를 입력하세요" value={pw} onChange={pwOnChange} />
-				<br />
-				<button>로그인</button>
-				<NavLink to="/join">회원가입</NavLink>
+				<input className="id" name="id" type="text" placeholder="아이디를 입력하세요" value={id} onChange={idOnChange} />
+				<input
+					className="pw"
+					name="pw"
+					type="password"
+					placeholder="비밀번호를 입력하세요"
+					value={pw}
+					onChange={pwOnChange}
+				/>
+				<div className="bottom_btn">
+					<button className="fill_button">로그인</button>
+					<NavLink to="/join">
+						<button type="button" className="join_btn">
+							회원가입
+						</button>
+					</NavLink>
+				</div>
 			</form>
-		</div>
+		</Login_div>
 	);
 };
 

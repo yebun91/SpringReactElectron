@@ -1,6 +1,35 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Join_div = styled.div`
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	h1 {
+		color: var(--gray-color);
+	}
+	input {
+		display: block;
+		margin: 20px 0;
+		width: 250px;
+		border: 1px solid var(--ligth-gray-color);
+	}
+	.join_btn {
+		color: var(--gray-color);
+	}
+	.bottom_btn {
+		display: flex;
+		justify-content: space-between;
+		button {
+			width: 100px;
+			border: 1px solid var(--ligth-gray-color);
+		}
+	}
+`;
 
 const Join = () => {
 	const [ id, setId ] = useState('');
@@ -42,12 +71,11 @@ const Join = () => {
 	};
 
 	return (
-		<div>
+		<Join_div>
+			<h1>회원가입</h1>
 			<form onSubmit={onSubmit}>
 				<input name="id" type="text" placeholder="아이디를 입력하세요" value={id} onChange={idOnChange} />
-				<br />
 				<input name="pw" type="password" placeholder="비밀번호를 입력하세요" value={pw} onChange={pwOnChange} />
-				<br />
 				<input
 					name="pw2"
 					type="password"
@@ -55,13 +83,17 @@ const Join = () => {
 					value={confirmPw}
 					onChange={confirmPwOnChange}
 				/>
-				<br />
 				<input name="name" type="text" placeholder="이름을 입력하세요" value={name} onChange={nameOnChange} />
-				<br />
-				<button>회원가입</button>
-				<NavLink to="/">취소</NavLink>
+				<div className="bottom_btn">
+					<button className="fill_button">회원가입</button>
+					<NavLink to="/">
+						<button type="button" className="join_btn">
+							취소
+						</button>
+					</NavLink>
+				</div>
 			</form>
-		</div>
+		</Join_div>
 	);
 };
 
